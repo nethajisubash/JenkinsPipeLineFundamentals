@@ -36,6 +36,9 @@ pipeline {
       }
     }
     stage('Approval') {
+      when {
+        branch 'master'
+      }
       steps {
         input(message: 'Ticket approved?', ok: 'Yes')
       }
