@@ -31,6 +31,8 @@ echo $Var14Test1 >> Test3.out'''
     stage('Deploy') {
       steps {
         echo 'What to deployed in international travel job'
+        unstash 'StashTest'
+        sh 'cat Test*'
       }
     }
   }
