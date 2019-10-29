@@ -1,13 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Start') {
-      steps {
-        slackSend "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-        emailext(subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                                    <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""", recipientProviders: [[$class: 'DevelopersRecipientProvider']])
-      }
-    }
     stage('Build') {
       steps {
         echo 'Building My career'
@@ -42,7 +35,7 @@ pipeline {
         sh 'cat Test*'
       }
     }
-    stage('error') {
+    stage('Approval') {
       steps {
         input(message: 'Ticket approved?', ok: 'Yes')
       }
