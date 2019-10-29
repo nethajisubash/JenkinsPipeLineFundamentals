@@ -9,8 +9,16 @@ pipeline {
     stage('Test') {
       parallel {
         stage('Test') {
+          environment {
+            Var14Test1 = 'Subash'
+          }
           steps {
             echo 'Taking Tests to prove myself'
+            sh '''ls -ltr / >> Test1.out
+ls -ltr /tmp >> Test2.out
+echo $Var14Test1 >> Test3.out'''
+            archiveArtifacts(artifacts: 'Test*.out', fingerprint: true)
+            stash(name: 'StashTest', includes: 'Test*.out')
           }
         }
         stage('Parallel Test') {
