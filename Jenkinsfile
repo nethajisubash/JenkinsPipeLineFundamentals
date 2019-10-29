@@ -36,6 +36,7 @@ pipeline {
       }
     }
     stage('Approval') {
+      agent any
       when {
         branch 'master'
       }
