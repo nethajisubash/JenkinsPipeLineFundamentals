@@ -15,8 +15,8 @@ pipeline {
           steps {
             echo 'Taking Tests to prove myself'
             sh '''ls -ltr / >> Test1.out
-ls -ltr /tmp >> Test2.out
-echo $Var14Test1 >> Test3.out'''
+            ls -ltr /tmp >> Test2.out
+            echo $Var14Test1 >> Test3.out'''
             archiveArtifacts(artifacts: 'Test*.out', fingerprint: true)
             stash(name: 'StashTest', includes: 'Test*.out')
           }
@@ -33,6 +33,11 @@ echo $Var14Test1 >> Test3.out'''
         echo 'What to deployed in international travel job'
         unstash 'StashTest'
         sh 'cat Test*'
+      }
+    }
+    stage('') {
+      steps {
+        input(message: 'Ticket approved?', ok: 'Yes', submitter: 'Subash')
       }
     }
   }
